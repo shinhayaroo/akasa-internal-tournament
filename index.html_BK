@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Permanent+Marker&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Permanent+Marker&display=swap"
         rel="stylesheet"
     >
 
@@ -51,6 +52,9 @@
             --blue: #276a92;
             --yellow: #b98620;
             --purple: #604878;
+
+            --comic-yellow: #ffd400;
+            --comic-blue: #1d6fd6;
         }
 
         /* =========================================================
@@ -203,53 +207,117 @@
         ========================================================= */
 
         .hero {
-            min-height: 100svh;
-            height: 100svh;
-            height: 750px;
+            min-height: 100vh;
+
             position: relative;
+
             display: flex;
-            align-items: flex-end;
-            justify-content: center;
+            align-items: center;
+
             overflow: hidden;
-            background: #050505;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(137,26,26,.28),
+                    transparent 45%
+                ),
+                #070707;
+        }
+
+        .moon {
+            position: absolute;
+
+            width: min(55vw, 650px);
+            height: min(55vw, 650px);
+
+            border-radius: 50%;
+
+            left: 50%;
+            top: 43%;
+
+            transform: translate(-50%, -50%);
+
+            background:
+                radial-gradient(
+                    circle at 35% 35%,
+                    #fff7df,
+                    #d9c49a 60%,
+                    #927b56
+                );
+
+            opacity: .82;
+
+            box-shadow:
+                0 0 100px rgba(255,220,150,.12);
+        }
+
+        .torii {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -43%);
+
+            width: min(42vw, 500px);
+
+            opacity: .75;
+        }
+
+        .torii::before {
+            content: "";
+
+            display: block;
+
+            width: 100%;
+            height: 22px;
+
+            background: #171313;
+
+            box-shadow:
+                0 20px 0 #171313;
+        }
+
+        .torii::after {
+            content: "";
+
+            display: block;
+
+            width: 25px;
+            height: 310px;
+
+            margin: -2px auto 0;
+
+            background: #171313;
+
+            box-shadow:
+                180px 0 0 #171313;
         }
 
         .hero-art {
             position: absolute;
+
             inset: 0;
-            width: 100%;
-            height: 100%;
 
-            background-image: url("bg.png");
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-        }
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,.15),
+                    rgba(0,0,0,.1) 50%,
+                    #080808 96%
+                ),
+                url("assets/battle-of-hashira-poster.png")
+                center top / cover no-repeat;
 
-        .hero-content,
-        .moon,
-        .torii {
-            display: none;
-        }
+            opacity: .28;
 
-        .hero::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 110px;
-            background: linear-gradient(
-                to bottom,
-                transparent,
-                #080808
-            );
-            pointer-events: none;
+            mix-blend-mode: screen;
         }
 
         /* =========================================================
            PETALS
-========================================================= */
+        ========================================================= */
 
         .petals {
             position: absolute;
@@ -624,25 +692,17 @@
         .format-grid {
             display: grid;
 
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, 1fr);
 
             gap: 22px;
 
-            max-width: 1100px;
+            max-width: 950px;
 
             margin: auto;
-
-            align-items: stretch;
         }
 
         .format-card {
             position: relative;
-
-            height: 100%;
-            min-height: 330px;
-
-            display: flex;
-            flex-direction: column;
 
             padding: 40px 35px;
 
@@ -726,14 +786,10 @@
             font-size: 14px;
 
             line-height: 1.8;
-
-            flex-grow: 1;
         }
 
         .format-highlight {
             display: inline-block;
-
-            align-self: flex-start;
 
             margin-top: 20px;
 
@@ -921,7 +977,7 @@
         .breathing-grid {
             display: grid;
 
-            grid-template-columns: repeat(7, minmax(0, 1fr));
+            grid-template-columns: repeat(6, 1fr);
 
             gap: 10px;
         }
@@ -1050,11 +1106,6 @@
 
         .mist {
             background: linear-gradient(145deg,#5d4b70,#1d1724);
-        }
-
-
-        .snake {
-            background: linear-gradient(145deg,#5b4778,#1d1627);
         }
 
         /* =========================================================
@@ -1319,174 +1370,330 @@
         }
 
         /* =========================================================
+           COMIC STYLE LAYER
+        ========================================================= */
+
+        body::after {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: .05;
+
+            background-image:
+                radial-gradient(
+                    rgba(255,255,255,.9) 1px,
+                    transparent 1.4px
+                );
+
+            background-size: 7px 7px;
+
+            mix-blend-mode: overlay;
+
+            z-index: 998;
+        }
+
+        .moon::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            border-radius: 50%;
+
+            background-image:
+                radial-gradient(
+                    rgba(0,0,0,.6) 1.4px,
+                    transparent 1.7px
+                );
+
+            background-size: 8px 8px;
+
+            opacity: .16;
+
+            mix-blend-mode: multiply;
+        }
+
+        .format-card::after,
+        .detail-card::before {
+            background-image:
+                radial-gradient(
+                    rgba(0,0,0,.55) 2px,
+                    transparent 2.4px
+                );
+
+            background-size: 11px 11px;
+
+            background-color: rgba(229,41,41,.1);
+        }
+
+        .event-label {
+            display: inline-block;
+            position: relative;
+
+            padding: 9px 24px;
+
+            background: var(--comic-yellow);
+            color: #0a0a0a;
+
+            font-family: "Bangers", cursive;
+            font-size: 15px;
+            letter-spacing: 3px;
+
+            border: 3px solid #000;
+            border-radius: 30px;
+
+            transform: rotate(-3deg);
+
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        .event-label::before {
+            content: "";
+
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+
+            transform: translateX(-50%);
+
+            border-style: solid;
+            border-width: 12px 10px 0 10px;
+            border-color: #000 transparent transparent transparent;
+        }
+
+        .event-label::after {
+            content: "";
+
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+
+            transform: translateX(-50%);
+
+            border-style: solid;
+            border-width: 9px 7px 0 7px;
+            border-color: var(--comic-yellow) transparent transparent transparent;
+        }
+
+        .section-tag,
+        .format-highlight,
+        .price-label {
+            font-family: "Bangers", cursive;
+            letter-spacing: 2px;
+        }
+
+        .format-highlight {
+            border: 2px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            transform: rotate(-2deg);
+        }
+
+        .section-title,
+        .register-title {
+            text-shadow:
+                4px 4px 0 #000,
+                7px 7px 0 var(--comic-yellow);
+        }
+
+        .register-title {
+            text-shadow:
+                5px 5px 0 #000,
+                9px 9px 0 var(--red);
+        }
+
+        .nav-register,
+        .register-button {
+            font-family: "Bangers", cursive;
+            filter: drop-shadow(4px 4px 0 #000);
+        }
+
+        .nav-register:hover,
+        .register-button:hover {
+            filter: drop-shadow(2px 2px 0 #000);
+        }
+
+        .hero-info,
+        .count-box,
+        .format-card,
+        .detail-card {
+            filter: drop-shadow(6px 6px 0 #000);
+        }
+
+        .format-card {
+            transition: .25s;
+        }
+
+        .format-card:hover {
+            transform: translateY(-6px);
+            filter: drop-shadow(3px 3px 0 #000);
+        }
+
+        .detail-card:hover {
+            filter: drop-shadow(3px 3px 0 #000);
+        }
+
+        .price-card,
+        .breathing-card {
+            border: 3px solid #000;
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        .price-card {
+            transition: .2s;
+        }
+
+        .price-card:hover {
+            box-shadow: 3px 3px 0 #000;
+        }
+
+        .breathing-card:hover {
+            box-shadow: 3px 3px 0 #000;
+        }
+
+        .comic-burst {
+            position: absolute;
+
+            width: 118px;
+            height: 118px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background: var(--comic-yellow);
+            color: #0a0a0a;
+
+            font-family: "Bangers", cursive;
+            font-size: 15px;
+            line-height: 1.15;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+
+            clip-path: polygon(
+                50% 0%, 63% 38%, 100% 50%,
+                63% 62%, 50% 100%, 38% 62%,
+                0% 50%, 38% 38%
+            );
+
+            filter: drop-shadow(3px 3px 0 #000);
+
+            z-index: 20;
+        }
+
+        .comic-burst--hero {
+            top: -6px;
+            right: 2%;
+
+            background: var(--red);
+            color: #fff;
+
+            transform: rotate(10deg);
+        }
+
+        .comic-burst--best {
+            top: -30px;
+            right: -22px;
+
+            width: 100px;
+            height: 100px;
+
+            font-size: 12px;
+
+            transform: rotate(12deg);
+        }
+
+        /* =========================================================
            RESPONSIVE
         ========================================================= */
 
         @media (max-width: 900px) {
 
+            .nav-links {
+                display: none;
+            }
+
             .breathing-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-        }
-
-
-        @media (max-width: 900px) {
-
-            .format-grid {
-                grid-template-columns: 1fr;
-                max-width: 650px;
-            }
-
-        }
-
-
-
-
-        /* =========================================================
-           PHONE CARD ARRANGEMENT
-           Match Tournament Details / Hashira / Your Mission
-           to the clean stacked format-card layout.
-        ========================================================= */
-
-        @media (max-width: 650px) {
-
-            /* Countdown: all four boxes equal size and centered */
-            .countdown {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                max-width: 360px;
-                margin: 0 auto;
-                gap: 14px;
-            }
-
-            .count-box {
-                min-height: 135px;
-                height: 135px;
-                padding: 24px 10px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .count-number {
-                width: 100%;
-                font-size: 52px;
-                line-height: 1;
-                text-align: center;
-            }
-
-            .count-label {
-                width: 100%;
-                margin-top: 10px;
-                text-align: center;
-            }
-
-            /* Tournament Details: same stacked card feel as
-               How The Battle Works */
-            .details-grid {
-                grid-template-columns: 1fr;
-                max-width: 650px;
-                margin: 0 auto;
-                gap: 22px;
-            }
-
-            .detail-card {
-                min-height: 330px;
-                height: 100%;
-                padding: 40px 35px;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-            }
-
-            .detail-card p {
-                flex-grow: 1;
-            }
-
-            .detail-price {
-                margin-top: 20px;
-            }
-
-            /* Battle of Hashira: one full-width card per row,
-               matching the section-format arrangement */
-            .breathing-grid {
-                grid-template-columns: 1fr;
-                max-width: 650px;
-                margin: 0 auto;
-                gap: 22px;
-            }
-
-            .breathing-card {
-                min-height: 330px;
-                height: 330px;
-                padding: 40px 35px;
-            }
-
-            /* Your Mission: same full-width card arrangement */
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                max-width: 650px;
-                margin: 50px auto 0;
-                gap: 22px;
-            }
-
-            .price-card {
-                min-height: 330px;
-                padding: 40px 35px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .price-description {
-                max-width: 360px;
+                grid-template-columns: repeat(3, 1fr);
             }
 
         }
 
         @media (max-width: 650px) {
 
-            .hero {
-                min-height: 0;
-                height: auto;
-                aspect-ratio: 2 / 3;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
+            .navbar {
+                padding: 0 20px;
             }
 
-            .hero-art {
-                position: absolute;
-                inset: 0;
-                width: 100%;
-                height: 100%;
-                background-image: url("bg_2.png");
-                background-size: 100% 100%;
-                background-position: center center;
-                background-repeat: no-repeat;
+            .logo-sub {
+                display: none;
             }
 
             .hero-content {
-                padding: 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-
-            .hero {
-                min-height: 0;
-                height: auto;
-                aspect-ratio: 2 / 3;
+                padding: 130px 20px 60px;
             }
 
-            .hero-art {
-                background-image: url("bg_2.png");
-                background-size: 100% 100%;
-                background-position: center center;
-                background-repeat: no-repeat;
+            .hero-title {
+                font-size: 65px;
+            }
+
+            .hero-info {
+                display: block;
+            }
+
+            .hero-info-item {
+                border-right: none;
+
+                border-bottom: 1px solid rgba(255,255,255,.1);
+            }
+
+            .hero-info-item:last-child {
+                border-bottom: none;
+            }
+
+            section {
+                padding: 80px 20px;
+            }
+
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .format-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breathing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card.featured {
+                transform: none;
+            }
+
+            .comic-burst--hero {
+                display: none;
+            }
+
+            .comic-burst--best {
+                width: 78px;
+                height: 78px;
+                font-size: 10px;
+                top: -18px;
+                right: -10px;
             }
 
         }
@@ -1494,9 +1701,7 @@
         @media (max-width: 400px) {
 
             .breathing-grid {
-                grid-template-columns: 1fr;
-                max-width: 650px;
-                margin: 0 auto;
+                grid-template-columns: 1fr 1fr;
             }
 
             .hero-title {
@@ -1509,72 +1714,169 @@
 
         }
 
-        /* =========================================================
-           SAKURA FALLING PETALS OVERLAY
-========================================================= */
-
-        .sakura-layer {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 60;
-            overflow: hidden;
-        }
-
-        .sakura-layer .petal {
-            position: absolute;
-            top: -8vh;
-            background: linear-gradient(135deg, #FFE3EE 0%, #FF9FC0 55%, #FF6FA0 100%);
-            border-radius: 0 60% 0 60%;
-            box-shadow: inset -2px -2px 3px rgba(176, 18, 48, 0.25);
-            animation-name: sakura-fall;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            will-change: transform, opacity;
-        }
-
-        @keyframes sakura-fall {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            8% {
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(118vh) translateX(var(--drift, 40px)) rotate(340deg);
-                opacity: 0.55;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .sakura-layer .petal {
-                animation: none;
-                display: none;
-            }
-        }
-
     </style>
 </head>
 
 
 <body>
-<div class="sakura-layer" id="sakuraLayer" aria-hidden="true"></div>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar">
+
+    <a href="#" class="logo">
+
+        <div>
+
+            <div class="logo-main">
+                AKASA <span class="logo-x">×</span> GHL
+            </div>
+
+            <div class="logo-sub">
+                Internal Mix Tournament
+            </div>
+
+        </div>
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#details">
+            Details
+        </a>
+
+        <a href="#format">
+            Format
+        </a>
+
+        <a href="#theme">
+            Theme
+        </a>
+
+        <a href="#fees">
+            Fees
+        </a>
+
+        <a
+            href="#register"
+            class="nav-register"
+        >
+            Register
+        </a>
+
+    </div>
+
+</nav>
+
+
 <!-- =========================================================
      HERO
 ========================================================= -->
 
-<header id="home" class="hero">
+<header
+    id="home"
+    class="hero"
+>
 
     <div class="hero-art"></div>
 
+    <div class="moon"></div>
+
+    <div class="torii"></div>
+
+
     <div class="petals">
+
         <div class="petal"></div>
         <div class="petal"></div>
         <div class="petal"></div>
         <div class="petal"></div>
         <div class="petal"></div>
         <div class="petal"></div>
+
+    </div>
+
+
+    <div class="hero-content">
+
+        <div class="comic-burst comic-burst--hero">
+            Let Fate<br>Decide!
+        </div>
+
+        <div class="event-label">
+            AKASA × GHL
+        </div>
+
+
+        <h1 class="hero-title">
+
+            Battle of
+            <span>Hashira</span>
+
+        </h1>
+
+
+        <div class="hero-subtitle">
+            Internal Mix Tournament
+        </div>
+
+
+        <div class="hero-sport">
+            Volleyball
+        </div>
+
+
+        <div class="hero-info">
+
+            <div class="hero-info-item">
+
+                <div class="hero-info-label">
+                    Date
+                </div>
+
+                <div class="hero-info-value">
+                    14 November 2026
+                </div>
+
+            </div>
+
+
+            <div class="hero-info-item">
+
+                <div class="hero-info-label">
+                    Time
+                </div>
+
+                <div class="hero-info-value">
+                    10:00 AM – 6:00 PM
+                </div>
+
+            </div>
+
+
+            <div class="hero-info-item">
+
+                <div class="hero-info-label">
+                    Venue
+                </div>
+
+                <div class="hero-info-value">
+                    149 Sports Arena
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </header>
@@ -1708,34 +2010,7 @@
         <div class="format-grid">
 
 
-            <!-- MIX TEAMS -->
-
-            <div class="format-card">
-
-                <div class="format-icon">
-
-                    <i class="fa-solid fa-people-group"></i>
-
-                </div>
-
-                <h3>
-                    Mix Teams
-                </h3>
-
-                <p>
-                    This is an internal mix tournament where
-                    players from different groups come together
-                    to form new teams and play together.
-                </p>
-
-                <div class="format-highlight">
-                    4 Men + 2 Women Per Team
-                </div>
-
-            </div>
-
-
-            <!-- RANDOM TEAMS -->
+            <!-- RANDOM TEAM -->
 
             <div class="format-card">
 
@@ -1751,7 +2026,7 @@
 
                 <p>
                     All registered players will be randomly
-                    assigned into teams.
+                    assigned into teams before the tournament.
                     You won't know who your teammates will be
                     until the teams are revealed.
                 </p>
@@ -1836,7 +2111,7 @@
 
             <!-- FEE -->
 
-            <!-- <div class="detail-card">
+            <div class="detail-card">
 
                 <div class="detail-icon">
 
@@ -1858,12 +2133,12 @@
                     <small>/ HEAD</small>
                 </div>
 
-            </div> -->
+            </div>
 
 
             <!-- JERSEY -->
 
-            <!-- <div class="detail-card">
+            <div class="detail-card">
 
                 <div class="detail-icon">
 
@@ -1884,7 +2159,7 @@
                     RM 29
                 </div>
 
-            </div> -->
+            </div>
 
 
             <!-- DATE -->
@@ -2025,28 +2300,6 @@
             </div>
 
 
-
-            <div class="breathing-card snake">
-
-                <div class="breathing-symbol">
-                    蛇
-                </div>
-
-                <div class="breathing-content">
-
-                    <h3>
-                        Snake
-                    </h3>
-
-                    <p>
-                        Sharp &amp; unpredictable
-                    </p>
-
-                </div>
-
-            </div>
-
-
             <div class="breathing-card flame">
 
                 <div class="breathing-symbol">
@@ -2169,6 +2422,10 @@
 
             <div class="price-card featured">
 
+                <div class="comic-burst comic-burst--best">
+                    Best<br>Value!
+                </div>
+
                 <div class="price-icon">
 
                     <i class="fa-solid fa-coins"></i>
@@ -2188,7 +2445,8 @@
                 </div>
 
                 <div class="price-description">
-                    Your entry include foods, medal and court fees.
+                    Your entry into the
+                    AKASA × GHL Internal Mix Tournament.
                 </div>
 
             </div>
@@ -2278,6 +2536,7 @@
         <!-- Replace with your Google Form -->
 
         <a
+            href="YOUR_GOOGLE_FORM_LINK"
             class="register-button"
             target="_blank"
         >
@@ -2405,32 +2664,6 @@
         1000
     );
 
-</script>
-
-<!-- =========================================================
-     SAKURA FALLING PETALS INIT
-========================================================= -->
-<script>
-  (function(){
-    var layer = document.getElementById('sakuraLayer');
-    if(!layer) return;
-    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(prefersReduced) return;
-    var total = 22; // number of petals on screen
-    for(var i=0; i<total; i++){
-      var petal = document.createElement('div');
-      petal.className = 'petal';
-      var size = 8 + Math.random()*10;
-      petal.style.width = size + 'px';
-      petal.style.height = size * 0.85 + 'px';
-      petal.style.left = (Math.random()*100) + 'vw';
-      petal.style.setProperty('--drift', (Math.random()*120 - 60) + 'px');
-      var duration = 9 + Math.random()*9;
-      petal.style.animationDuration = duration + 's';
-      petal.style.animationDelay = (Math.random()*duration) + 's';
-      layer.appendChild(petal);
-    }
-  })();
 </script>
 
 
