@@ -1512,6 +1512,44 @@
         /* =========================================================
            SAKURA FALLING PETALS OVERLAY
 ========================================================= */
+/* Floating music button */
+    .music-toggle {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 100;
+        width: 54px;
+        height: 54px;
+        border: 1px solid rgba(212, 175, 55, 0.7);
+        border-radius: 50%;
+        background: rgba(10, 10, 10, 0.88);
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .music-toggle:hover {
+        transform: scale(1.08);
+        background: var(--gold);
+        color: #080808;
+    }
+
+    .music-toggle.playing {
+        animation: musicPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes musicPulse {
+        0%, 100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(212, 175, 55, 0.35); }
+        50% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), 0 0 0 9px rgba(212, 175, 55, 0); }
+    }
+
 
         .sakura-layer {
             position: fixed;
@@ -1560,6 +1598,24 @@
 
 <body>
 <div class="sakura-layer" id="sakuraLayer" aria-hidden="true"></div>
+
+<!-- =========================================================
+     BACKGROUND MUSIC
+========================================================= -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<button
+    class="music-toggle"
+    id="musicToggle"
+    type="button"
+    aria-label="Play background music"
+    title="Play music"
+>
+    <i class="fa-solid fa-volume-high"></i>
+</button>
+
 <!-- =========================================================
      HERO
 ========================================================= -->
@@ -2435,6 +2491,82 @@
       layer.appendChild(petal);
     }
   })();
+</script>
+
+<!-- =========================================================
+     BACKGROUND MUSIC CONTROL
+========================================================= -->
+
+<script>
+(function () {
+    const music = document.getElementById("bgMusic");
+    const button = document.getElementById("musicToggle");
+
+    if (!music || !button) return;
+
+    function updateMusicButton() {
+        const playing = !music.paused;
+
+        button.classList.toggle("playing", playing);
+
+        button.innerHTML = playing
+            ? '<i class="fa-solid fa-music"></i>'
+            : '<i class="fa-solid fa-volume-xmark"></i>';
+
+        button.setAttribute(
+            "aria-label",
+            playing ? "Mute background music" : "Play background music"
+        );
+
+        button.setAttribute(
+            "title",
+            playing ? "Mute music" : "Play music"
+        );
+    }
+
+    // Auto play when page opens
+    music.volume = 1.0;
+
+    music.play().then(function () {
+        updateMusicButton();
+    }).catch(function () {
+        // Browser blocked autoplay.
+        // Start music on the first user interaction.
+        updateMusicButton();
+
+        const startMusic = function () {
+            music.play().then(function () {
+                updateMusicButton();
+            }).catch(function () {});
+
+            document.removeEventListener("click", startMusic);
+            document.removeEventListener("touchstart", startMusic);
+            document.removeEventListener("keydown", startMusic);
+        };
+
+        document.addEventListener("click", startMusic, { once: true });
+        document.addEventListener("touchstart", startMusic, { once: true });
+        document.addEventListener("keydown", startMusic, { once: true });
+    });
+
+    // Music button
+    button.addEventListener("click", function (event) {
+        event.stopPropagation();
+
+        if (music.paused) {
+            music.play().then(function () {
+                updateMusicButton();
+            }).catch(function () {});
+        } else {
+            music.pause();
+            updateMusicButton();
+        }
+    });
+
+    music.addEventListener("play", updateMusicButton);
+    music.addEventListener("pause", updateMusicButton);
+
+})();
 </script>
 
 
