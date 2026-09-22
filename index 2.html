@@ -1,0 +1,2439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Battle of Hashira | AKASA × GHL</title>
+
+    <meta
+        name="description"
+        content="AKASA × GHL Internal Mix Tournament Volleyball — Battle of Hashira"
+    >
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Permanent+Marker&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+            --black: #080808;
+            --black-soft: #111111;
+            --black-card: #171717;
+
+            --red: #e52929;
+            --red-dark: #991b1b;
+
+            --gold: #e7b84b;
+            --cream: #f1e4c8;
+
+            --white: #ffffff;
+            --muted: #a7a7a7;
+
+            --green: #235a46;
+            --pink: #b9416e;
+            --blue: #276a92;
+            --yellow: #b98620;
+            --purple: #604878;
+        }
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           TEXTURE
+        ========================================================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: .06;
+
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(255,255,255,.2) 4px
+                );
+
+            z-index: 999;
+        }
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+
+            background: rgba(5,5,5,.78);
+
+            backdrop-filter: blur(16px);
+
+            border-bottom: 1px solid rgba(255,255,255,.08);
+
+            z-index: 1000;
+        }
+
+        .logo-main {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 29px;
+
+            letter-spacing: 1px;
+        }
+
+        .logo-x {
+            color: var(--red);
+        }
+
+        .logo-sub {
+            font-size: 10px;
+
+            color: #8d8d8d;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+        }
+
+        .nav-links a {
+            color: #c9c9c9;
+
+            transition: .2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-register {
+            padding: 11px 21px;
+
+            background: var(--red);
+
+            color: white !important;
+
+            clip-path: polygon(
+                4% 0,
+                100% 0,
+                96% 100%,
+                0 100%
+            );
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 100svh;
+            height: 100svh;
+            height: 750px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+            background: #050505;
+        }
+
+        .hero-art {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+
+            background-image: url("bg.png");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-content,
+        .moon,
+        .torii {
+            display: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 110px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                #080808
+            );
+            pointer-events: none;
+        }
+
+        /* =========================================================
+           PETALS
+========================================================= */
+
+        .petals {
+            position: absolute;
+            inset: 0;
+
+            pointer-events: none;
+
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+
+            width: 10px;
+            height: 16px;
+
+            background: #c94d64;
+
+            border-radius: 80% 0 80% 0;
+
+            transform: rotate(45deg);
+
+            opacity: .65;
+
+            animation: fall linear infinite;
+        }
+
+        .petal:nth-child(1) {
+            left: 5%;
+            animation-duration: 8s;
+            animation-delay: 1s;
+        }
+
+        .petal:nth-child(2) {
+            left: 18%;
+            animation-duration: 11s;
+            animation-delay: 2s;
+        }
+
+        .petal:nth-child(3) {
+            left: 31%;
+            animation-duration: 9s;
+            animation-delay: 4s;
+        }
+
+        .petal:nth-child(4) {
+            left: 57%;
+            animation-duration: 12s;
+            animation-delay: 1s;
+        }
+
+        .petal:nth-child(5) {
+            left: 72%;
+            animation-duration: 10s;
+            animation-delay: 3s;
+        }
+
+        .petal:nth-child(6) {
+            left: 88%;
+            animation-duration: 8s;
+            animation-delay: 5s;
+        }
+
+        @keyframes fall {
+
+            0% {
+                top: -30px;
+                transform: translateX(0) rotate(45deg);
+            }
+
+            100% {
+                top: 110%;
+                transform: translateX(180px) rotate(420deg);
+            }
+        }
+
+        /* =========================================================
+           HERO CONTENT
+        ========================================================= */
+
+        .hero-content {
+            position: relative;
+
+            z-index: 5;
+
+            width: 100%;
+
+            padding: 150px 6% 80px;
+
+            text-align: center;
+        }
+
+        .event-label {
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            color: var(--gold);
+
+            margin-bottom: 22px;
+        }
+
+        .hero-title {
+            font-family: "Permanent Marker", cursive;
+
+            font-size: clamp(65px, 11vw, 150px);
+
+            line-height: .82;
+
+            text-transform: uppercase;
+
+            transform: rotate(-2deg);
+
+            color: #f4eee0;
+
+            text-shadow:
+                6px 6px 0 #080808,
+                10px 10px 0 rgba(229,41,41,.85);
+
+            margin-bottom: 25px;
+        }
+
+        .hero-title span {
+            color: var(--red);
+        }
+
+        .hero-subtitle {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: clamp(25px, 4vw, 45px);
+
+            letter-spacing: 8px;
+
+            margin-bottom: 8px;
+        }
+
+        .hero-sport {
+            color: var(--gold);
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 38px;
+        }
+
+        .hero-info {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            max-width: 900px;
+
+            margin: auto;
+
+            background: rgba(9,9,9,.78);
+
+            border: 1px solid rgba(241,228,200,.25);
+
+            backdrop-filter: blur(8px);
+
+            clip-path: polygon(
+                1% 0,
+                99% 0,
+                100% 10%,
+                99% 100%,
+                1% 100%,
+                0 90%
+            );
+        }
+
+        .hero-info-item {
+            flex: 1;
+
+            min-width: 220px;
+
+            padding: 22px;
+
+            border-right: 1px solid rgba(255,255,255,.1);
+        }
+
+        .hero-info-item:last-child {
+            border-right: none;
+        }
+
+        .hero-info-label {
+            color: #888;
+
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 8px;
+        }
+
+        .hero-info-value {
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           COMMON SECTION
+        ========================================================= */
+
+        section {
+            position: relative;
+
+            padding: 110px 6%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1150px;
+
+            margin: auto;
+        }
+
+        .section-tag {
+            color: var(--gold);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: "Permanent Marker", cursive;
+
+            font-size: clamp(42px, 6vw, 75px);
+
+            line-height: .95;
+
+            transform: rotate(-1deg);
+
+            margin-bottom: 18px;
+        }
+
+        .section-description {
+            color: var(--muted);
+
+            max-width: 620px;
+
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           COUNTDOWN
+        ========================================================= */
+
+        .countdown-section {
+            background:
+                linear-gradient(
+                    180deg,
+                    #080808,
+                    #121010
+                );
+
+            border-top: 1px solid rgba(255,255,255,.05);
+        }
+
+        .countdown-header {
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .countdown-header .section-title {
+            color: var(--cream);
+        }
+
+        .countdown {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 14px;
+
+            max-width: 850px;
+
+            margin: auto;
+        }
+
+        .count-box {
+            padding: 35px 15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1a1817,
+                    #0e0e0e
+                );
+
+            border: 1px solid rgba(231,184,75,.22);
+
+            clip-path: polygon(
+                4% 0,
+                96% 0,
+                100% 6%,
+                100% 94%,
+                96% 100%,
+                4% 100%,
+                0 94%,
+                0 6%
+            );
+        }
+
+        .count-number {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: clamp(45px, 6vw, 75px);
+
+            line-height: .9;
+
+            color: var(--red);
+        }
+
+        .count-label {
+            color: #888;
+
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-top: 12px;
+        }
+
+        /* =========================================================
+           HOW THE BATTLE WORKS
+        ========================================================= */
+
+        .format-section {
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(229,41,41,.11),
+                    transparent 50%
+                ),
+                #0b0b0b;
+        }
+
+        .format-heading {
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+        .format-heading .section-title {
+            color: var(--cream);
+        }
+
+        .format-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            gap: 22px;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            align-items: stretch;
+        }
+
+        .format-card {
+            position: relative;
+
+            height: 100%;
+            min-height: 330px;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 40px 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1b1918,
+                    #101010
+                );
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            overflow: hidden;
+
+            clip-path: polygon(
+                2% 0,
+                98% 0,
+                100% 3%,
+                100% 97%,
+                98% 100%,
+                2% 100%,
+                0 97%,
+                0 3%
+            );
+        }
+
+        .format-card::after {
+            content: "";
+
+            position: absolute;
+
+            right: -70px;
+            bottom: -80px;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background: rgba(229,41,41,.08);
+        }
+
+        .format-icon {
+            width: 64px;
+            height: 64px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 22px;
+
+            background: var(--red);
+
+            color: white;
+
+            font-size: 25px;
+
+            clip-path: polygon(
+                8% 0,
+                92% 0,
+                100% 10%,
+                92% 100%,
+                8% 100%,
+                0 90%
+            );
+        }
+
+        .format-card h3 {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 34px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+        }
+
+        .format-card p {
+            color: #999;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            flex-grow: 1;
+        }
+
+        .format-highlight {
+            display: inline-block;
+
+            align-self: flex-start;
+
+            margin-top: 20px;
+
+            padding: 8px 13px;
+
+            color: var(--gold);
+
+            background: rgba(231,184,75,.08);
+
+            border: 1px solid rgba(231,184,75,.2);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        /* =========================================================
+           DETAILS
+        ========================================================= */
+
+        .details-section {
+            background: #0d0d0d;
+        }
+
+        .details-heading {
+            text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+        .details-heading .section-title {
+            color: var(--cream);
+        }
+
+        .details-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .detail-card {
+            position: relative;
+
+            min-height: 230px;
+
+            padding: 35px;
+
+            overflow: hidden;
+
+            background: #161616;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            clip-path: polygon(
+                2% 0,
+                98% 0,
+                100% 3%,
+                100% 97%,
+                98% 100%,
+                2% 100%,
+                0 97%,
+                0 3%
+            );
+
+            transition: .3s;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-6px);
+
+            border-color: rgba(231,184,75,.35);
+        }
+
+        .detail-card::before {
+            content: "";
+
+            position: absolute;
+
+            right: -70px;
+            bottom: -90px;
+
+            width: 230px;
+            height: 230px;
+
+            border-radius: 50%;
+
+            background: rgba(229,41,41,.08);
+        }
+
+        /* ICON */
+
+        .detail-icon {
+            width: 56px;
+            height: 56px;
+
+            display: grid;
+            place-items: center;
+
+            background: var(--red);
+
+            color: white;
+
+            font-size: 22px;
+
+            margin-bottom: 22px;
+
+            clip-path: polygon(
+                8% 0,
+                92% 0,
+                100% 10%,
+                92% 100%,
+                8% 100%,
+                0 90%
+            );
+        }
+
+        .detail-card h3 {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 30px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+        }
+
+        .detail-card p {
+            color: #929292;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+        .detail-price {
+            margin-top: 18px;
+
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 42px;
+
+            color: var(--gold);
+        }
+
+        .detail-price small {
+            font-family: "Inter", sans-serif;
+
+            font-size: 11px;
+
+            color: #777;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================================================
+           HASHIRA / BREATHING
+        ========================================================= */
+
+        .breathing-section {
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(112,34,40,.14),
+                    transparent 55%
+                ),
+                #090909;
+        }
+
+        .breathing-heading {
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+        .breathing-heading .section-title {
+            color: var(--cream);
+        }
+
+        .breathing-grid {
+            display: grid;
+
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+        .breathing-card {
+            min-height: 290px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: flex-end;
+
+            padding: 22px;
+
+            border: 1px solid rgba(255,255,255,.1);
+
+            transition: .3s;
+        }
+
+        .breathing-card:hover {
+            transform: translateY(-10px);
+
+            z-index: 2;
+        }
+
+        .breathing-card::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    transparent 20%,
+                    rgba(0,0,0,.88) 100%
+                );
+        }
+
+        .breathing-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            border-radius: 50%;
+
+            top: 25px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            border: 2px solid rgba(255,255,255,.12);
+        }
+
+        .breathing-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .breathing-symbol {
+            position: absolute;
+
+            top: 40px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            z-index: 2;
+
+            font-size: 58px;
+
+            font-family: "Cinzel", serif;
+
+            color: rgba(255,255,255,.8);
+        }
+
+        .breathing-card h3 {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 27px;
+
+            letter-spacing: 2px;
+        }
+
+        .breathing-card p {
+            color: rgba(255,255,255,.65);
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-top: 4px;
+        }
+
+        .wind {
+            background: linear-gradient(145deg,#214b3c,#101a16);
+        }
+
+        .love {
+            background: linear-gradient(145deg,#8d365a,#24121a);
+        }
+
+        .flame {
+            background: linear-gradient(145deg,#9d2b1f,#2b0e0b);
+        }
+
+        .water {
+            background: linear-gradient(145deg,#245e7e,#0c1c27);
+        }
+
+        .thunder {
+            background: linear-gradient(145deg,#9b741e,#28200b);
+        }
+
+        .mist {
+            background: linear-gradient(145deg,#5d4b70,#1d1724);
+        }
+
+
+        .snake {
+            background: linear-gradient(145deg,#5b4778,#1d1627);
+        }
+
+        /* =========================================================
+           PRICING
+        ========================================================= */
+
+        .pricing-section {
+            background: #0c0c0c;
+        }
+
+        .pricing-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+
+            max-width: 900px;
+
+            margin: 50px auto 0;
+        }
+
+        .price-card {
+            position: relative;
+
+            padding: 45px 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1b1917,
+                    #101010
+                );
+
+            border: 1px solid rgba(231,184,75,.2);
+
+            text-align: center;
+
+            overflow: hidden;
+        }
+
+        .price-card.featured {
+            border-color: var(--red);
+
+            transform: translateY(-8px);
+        }
+
+        .price-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 5px;
+
+            background: var(--red);
+        }
+
+        .price-icon {
+            width: 60px;
+            height: 60px;
+
+            display: grid;
+            place-items: center;
+
+            margin: 0 auto 18px;
+
+            background: rgba(229,41,41,.12);
+
+            color: var(--red);
+
+            border: 1px solid rgba(229,41,41,.3);
+
+            border-radius: 50%;
+
+            font-size: 22px;
+        }
+
+        .price-label {
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #888;
+
+            margin-bottom: 15px;
+        }
+
+        .price-amount {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 75px;
+
+            line-height: 1;
+
+            color: var(--gold);
+        }
+
+        .price-unit {
+            font-size: 12px;
+
+            color: #888;
+
+            margin-top: 10px;
+        }
+
+        .price-description {
+            margin-top: 25px;
+
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           REGISTER
+        ========================================================= */
+
+        .register-section {
+            padding: 130px 6%;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(229,41,41,.2),
+                    transparent 55%
+                ),
+                #080808;
+        }
+
+        .register-kanji {
+            font-family: "Cinzel", serif;
+
+            font-size: clamp(130px, 25vw, 350px);
+
+            color: rgba(255,255,255,.025);
+
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            pointer-events: none;
+        }
+
+        .register-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .register-title {
+            font-family: "Permanent Marker", cursive;
+
+            font-size: clamp(50px, 8vw, 100px);
+
+            line-height: .9;
+
+            transform: rotate(-2deg);
+
+            margin-bottom: 25px;
+
+            color: var(--cream);
+
+            text-shadow:
+                5px 5px 0 var(--red);
+        }
+
+        .register-text {
+            max-width: 550px;
+
+            margin: auto auto 35px;
+
+            color: #999;
+
+            line-height: 1.8;
+        }
+
+        .register-button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 240px;
+
+            padding: 17px 30px;
+
+            background: var(--red);
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            clip-path: polygon(
+                3% 0,
+                100% 0,
+                97% 100%,
+                0 100%
+            );
+
+            transition: .25s;
+        }
+
+        .register-button:hover {
+            transform: scale(1.04) rotate(-1deg);
+
+            background: #f03838;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 35px 6%;
+
+            background: #050505;
+
+            border-top: 1px solid rgba(255,255,255,.06);
+
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: "Bebas Neue", sans-serif;
+
+            font-size: 25px;
+
+            letter-spacing: 2px;
+        }
+
+        .footer-title span {
+            color: var(--red);
+        }
+
+        .footer-text {
+            margin-top: 8px;
+
+            color: #666;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .breathing-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .format-grid {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+            }
+
+        }
+
+
+
+
+        /* =========================================================
+           PHONE CARD ARRANGEMENT
+           Match Tournament Details / Hashira / Your Mission
+           to the clean stacked format-card layout.
+        ========================================================= */
+
+        @media (max-width: 650px) {
+
+            /* Countdown: all four boxes equal size and centered */
+            .countdown {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                max-width: 360px;
+                margin: 0 auto;
+                gap: 14px;
+            }
+
+            .count-box {
+                min-height: 135px;
+                height: 135px;
+                padding: 24px 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .count-number {
+                width: 100%;
+                font-size: 52px;
+                line-height: 1;
+                text-align: center;
+            }
+
+            .count-label {
+                width: 100%;
+                margin-top: 10px;
+                text-align: center;
+            }
+
+            /* Tournament Details: same stacked card feel as
+               How The Battle Works */
+            .details-grid {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+                margin: 0 auto;
+                gap: 22px;
+            }
+
+            .detail-card {
+                min-height: 330px;
+                height: 100%;
+                padding: 40px 35px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
+            .detail-card p {
+                flex-grow: 1;
+            }
+
+            .detail-price {
+                margin-top: 20px;
+            }
+
+            /* Battle of Hashira: one full-width card per row,
+               matching the section-format arrangement */
+            .breathing-grid {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+                margin: 0 auto;
+                gap: 22px;
+            }
+
+            .breathing-card {
+                min-height: 330px;
+                height: 330px;
+                padding: 40px 35px;
+            }
+
+            /* Your Mission: same full-width card arrangement */
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+                margin: 50px auto 0;
+                gap: 22px;
+            }
+
+            .price-card {
+                min-height: 330px;
+                padding: 40px 35px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .price-description {
+                max-width: 360px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .hero {
+                min-height: 0;
+                height: auto;
+                aspect-ratio: 2 / 3;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .hero-art {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url("bg_2.png");
+                background-size: 100% 100%;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+
+            .hero-content {
+                padding: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .hero {
+                min-height: 0;
+                height: auto;
+                aspect-ratio: 2 / 3;
+            }
+
+            .hero-art {
+                background-image: url("bg_2.png");
+                background-size: 100% 100%;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+
+        }
+
+        @media (max-width: 400px) {
+
+            .breathing-grid {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+                margin: 0 auto;
+            }
+
+            .hero-title {
+                font-size: 55px;
+            }
+
+            .count-number {
+                font-size: 45px;
+            }
+
+        }
+
+        /* =========================================================
+           SAKURA FALLING PETALS OVERLAY
+========================================================= */
+
+        .sakura-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+            overflow: hidden;
+        }
+
+        .sakura-layer .petal {
+            position: absolute;
+            top: -8vh;
+            background: linear-gradient(135deg, #FFE3EE 0%, #FF9FC0 55%, #FF6FA0 100%);
+            border-radius: 0 60% 0 60%;
+            box-shadow: inset -2px -2px 3px rgba(176, 18, 48, 0.25);
+            animation-name: sakura-fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes sakura-fall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            8% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(118vh) translateX(var(--drift, 40px)) rotate(340deg);
+                opacity: 0.55;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sakura-layer .petal {
+                animation: none;
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+<div class="sakura-layer" id="sakuraLayer" aria-hidden="true"></div>
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<header id="home" class="hero">
+
+    <div class="hero-art"></div>
+
+    <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     COUNTDOWN
+========================================================= -->
+
+<section class="countdown-section">
+
+    <div class="container">
+
+        <div class="countdown-header">
+
+            <div class="section-tag">
+                The battle begins in
+            </div>
+
+            <h2 class="section-title">
+                Countdown
+            </h2>
+
+        </div>
+
+
+        <div class="countdown">
+
+            <div class="count-box">
+
+                <div
+                    id="days"
+                    class="count-number"
+                >
+                    00
+                </div>
+
+                <div class="count-label">
+                    Days
+                </div>
+
+            </div>
+
+
+            <div class="count-box">
+
+                <div
+                    id="hours"
+                    class="count-number"
+                >
+                    00
+                </div>
+
+                <div class="count-label">
+                    Hours
+                </div>
+
+            </div>
+
+
+            <div class="count-box">
+
+                <div
+                    id="minutes"
+                    class="count-number"
+                >
+                    00
+                </div>
+
+                <div class="count-label">
+                    Minutes
+                </div>
+
+            </div>
+
+
+            <div class="count-box">
+
+                <div
+                    id="seconds"
+                    class="count-number"
+                >
+                    00
+                </div>
+
+                <div class="count-label">
+                    Seconds
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW THE BATTLE WORKS
+========================================================= -->
+
+<section
+    id="format"
+    class="format-section"
+>
+
+    <div class="container">
+
+        <div class="format-heading">
+
+            <div class="section-tag">
+                Enter the battlefield
+            </div>
+
+            <h2 class="section-title">
+                How The Battle Works
+            </h2>
+
+            <p
+                class="section-description"
+                style="margin:auto;"
+            >
+                No fixed teams. No choosing your own squad.
+                Everyone enters the battle and lets fate decide.
+            </p>
+
+        </div>
+
+
+        <div class="format-grid">
+
+
+            <!-- MIX TEAMS -->
+
+            <div class="format-card">
+
+                <div class="format-icon">
+
+                    <i class="fa-solid fa-people-group"></i>
+
+                </div>
+
+                <h3>
+                    Mix Teams
+                </h3>
+
+                <p>
+                    This is an internal mix tournament where
+                    players from different groups come together
+                    to form new teams and play together.
+                </p>
+
+                <div class="format-highlight">
+                    4 Men + 2 Women Per Team
+                </div>
+
+            </div>
+
+
+            <!-- RANDOM TEAMS -->
+
+            <div class="format-card">
+
+                <div class="format-icon">
+
+                    <i class="fa-solid fa-shuffle"></i>
+
+                </div>
+
+                <h3>
+                    Random Teams
+                </h3>
+
+                <p>
+                    All registered players will be randomly
+                    assigned into teams.
+                    You won't know who your teammates will be
+                    until the teams are revealed.
+                </p>
+
+                <div class="format-highlight">
+                    Let Fate Decide
+                </div>
+
+            </div>
+
+
+            <!-- ROUND ROBIN -->
+
+            <div class="format-card">
+
+                <div class="format-icon">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                </div>
+
+                <h3>
+                    Round Robin
+                </h3>
+
+                <p>
+                    Every team will battle against the other
+                    teams in a round-robin format. Each match
+                    gives your team a chance to earn points
+                    and climb the standings.
+                </p>
+
+                <div class="format-highlight">
+                    Everyone Gets to Battle
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DETAILS
+========================================================= -->
+
+<section
+    id="details"
+    class="details-section"
+>
+
+    <div class="container">
+
+        <div class="details-heading">
+
+            <div class="section-tag">
+                Know your mission
+            </div>
+
+            <h2 class="section-title">
+                Tournament Details
+            </h2>
+
+            <p
+                class="section-description"
+                style="margin:auto;"
+            >
+                Gather your people, prepare your skills,
+                and get ready for a full day of volleyball,
+                competition and fun.
+            </p>
+
+        </div>
+
+
+        <div class="details-grid">
+
+
+            <!-- FEE -->
+
+            <!-- <div class="detail-card">
+
+                <div class="detail-icon">
+
+                    <i class="fa-solid fa-coins"></i>
+
+                </div>
+
+                <h3>
+                    Tournament Fee
+                </h3>
+
+                <p>
+                    Entry fee for every participant joining
+                    the AKASA × GHL Internal Mix Tournament.
+                </p>
+
+                <div class="detail-price">
+                    RM 35
+                    <small>/ HEAD</small>
+                </div>
+
+            </div> -->
+
+
+            <!-- JERSEY -->
+
+            <!-- <div class="detail-card">
+
+                <div class="detail-icon">
+
+                    <i class="fa-solid fa-shirt"></i>
+
+                </div>
+
+                <h3>
+                    Official Jersey
+                </h3>
+
+                <p>
+                    Get your tournament jersey and bring
+                    the spirit of the Hashira onto the court.
+                </p>
+
+                <div class="detail-price">
+                    RM 29
+                </div>
+
+            </div> -->
+
+
+            <!-- DATE -->
+
+            <div class="detail-card">
+
+                <div class="detail-icon">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                </div>
+
+                <h3>
+                    Battle Day
+                </h3>
+
+                <p>
+                    Saturday, 14 November 2026.
+                    Make sure you're ready before the first serve.
+                </p>
+
+                <div class="detail-price">
+                    10 AM
+                    <small>START</small>
+                </div>
+
+            </div>
+
+
+            <!-- VENUE -->
+
+            <div class="detail-card">
+
+                <div class="detail-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+                <h3>
+                    Battle Arena
+                </h3>
+
+                <p>
+                    149 Sports Arena.
+                    This is where your team will enter the battlefield.
+                </p>
+
+                <div class="detail-price">
+                    149
+                    <small>SPORTS ARENA</small>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     THEME
+========================================================= -->
+
+<section
+    id="theme"
+    class="breathing-section"
+>
+
+    <div class="container">
+
+        <div class="breathing-heading">
+
+            <div class="section-tag">
+                Choose your style
+            </div>
+
+            <h2 class="section-title">
+                Battle of Hashira
+            </h2>
+
+            <p
+                class="section-description"
+                style="margin:auto;"
+            >
+                Different styles. Different people.
+                One court. One team. One battle.
+            </p>
+
+        </div>
+
+
+        <div class="breathing-grid">
+
+
+            <div class="breathing-card wind">
+
+                <div class="breathing-symbol">
+                    風
+                </div>
+
+                <div class="breathing-content">
+
+                    <h3>
+                        Wind
+                    </h3>
+
+                    <p>
+                        Swift &amp; unpredictable
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="breathing-card love">
+
+                <div class="breathing-symbol">
+                    恋
+                </div>
+
+                <div class="breathing-content">
+
+                    <h3>
+                        Love
+                    </h3>
+
+                    <p>
+                        Fast &amp; fearless
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="breathing-card snake">
+
+                <div class="breathing-symbol">
+                    蛇
+                </div>
+
+                <div class="breathing-content">
+
+                    <h3>
+                        Snake
+                    </h3>
+
+                    <p>
+                        Sharp &amp; unpredictable
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="breathing-card flame">
+
+                <div class="breathing-symbol">
+                    炎
+                </div>
+
+                <div class="breathing-content">
+
+                    <h3>
+                        Flame
+                    </h3>
+
+                    <p>
+                        Power &amp; passion
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="breathing-card water">
+
+                <div class="breathing-symbol">
+                    水
+                </div>
+
+                <div class="breathing-content">
+
+                    <h3>
+                        Water
+                    </h3>
+
+                    <p>
+                        Calm &amp; precise
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="breathing-card thunder">
+
+                <div class="breathing-symbol">
+                    雷
+                </div>
+
+                <div class="breathing-content">
+
+                    <h3>
+                        Thunder
+                    </h3>
+
+                    <p>
+                        Speed &amp; reaction
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="breathing-card mist">
+
+                <div class="breathing-symbol">
+                    霞
+                </div>
+
+                <div class="breathing-content">
+
+                    <h3>
+                        Mist
+                    </h3>
+
+                    <p>
+                        Trick &amp; technique
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEES
+========================================================= -->
+
+<section
+    id="fees"
+    class="pricing-section"
+>
+
+    <div class="container">
+
+        <div class="details-heading">
+
+            <div class="section-tag">
+                Enter the battle
+            </div>
+
+            <h2 class="section-title">
+                Your Mission
+            </h2>
+
+        </div>
+
+
+        <div class="pricing-grid">
+
+
+            <!-- TOURNAMENT FEE -->
+
+            <div class="price-card featured">
+
+                <div class="price-icon">
+
+                    <i class="fa-solid fa-coins"></i>
+
+                </div>
+
+                <div class="price-label">
+                    Tournament Entry
+                </div>
+
+                <div class="price-amount">
+                    RM35
+                </div>
+
+                <div class="price-unit">
+                    PER HEAD
+                </div>
+
+                <div class="price-description">
+                    Your entry include foods, medal and court fees.
+                </div>
+
+            </div>
+
+
+            <!-- JERSEY -->
+
+            <div class="price-card">
+
+                <div class="price-icon">
+
+                    <i class="fa-solid fa-shirt"></i>
+
+                </div>
+
+                <div class="price-label">
+                    Official Jersey
+                </div>
+
+                <div class="price-amount">
+                    RM29
+                </div>
+
+                <div class="price-unit">
+                    PER JERSEY
+                </div>
+
+                <div class="price-description">
+                    Wear the spirit.
+                    Play with pride.
+                    Represent your team.
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     REGISTER
+========================================================= -->
+
+<section
+    id="register"
+    class="register-section"
+>
+
+    <div class="register-kanji">
+        柱
+    </div>
+
+
+    <div class="register-content">
+
+        <div class="section-tag">
+            Gather your team
+        </div>
+
+
+        <h2 class="register-title">
+            Ready for<br>
+            Battle?
+        </h2>
+
+
+        <p class="register-text">
+
+            You don't choose your team.
+
+            <br>
+
+            You don't know who you'll battle with.
+
+            <br><br>
+
+            Register, enter the battlefield,
+            and let fate decide your Hashira.
+
+        </p>
+
+
+        <!-- Replace with your Google Form -->
+
+        <a
+            class="register-button"
+            target="_blank"
+        >
+            <i
+                class="fa-solid fa-khanda"
+                style="margin-right:10px;"
+            ></i>
+
+            Register Now
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="footer-title">
+        AKASA <span>×</span> GHL
+    </div>
+
+    <div class="footer-text">
+        BATTLE OF HASHIRA · INTERNAL MIX TOURNAMENT · VOLLEYBALL
+    </div>
+
+    <div class="footer-text">
+        14 NOVEMBER 2026 · 149 SPORTS ARENA
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     COUNTDOWN
+========================================================= -->
+
+<script>
+
+    const tournamentDate =
+        new Date("2026-11-14T10:00:00+08:00").getTime();
+
+
+    function updateCountdown() {
+
+        const now =
+            new Date().getTime();
+
+        const distance =
+            tournamentDate - now;
+
+
+        if (distance <= 0) {
+
+            document.getElementById("days").textContent = "00";
+            document.getElementById("hours").textContent = "00";
+            document.getElementById("minutes").textContent = "00";
+            document.getElementById("seconds").textContent = "00";
+
+            return;
+        }
+
+
+        const days =
+            Math.floor(
+                distance /
+                (1000 * 60 * 60 * 24)
+            );
+
+
+        const hours =
+            Math.floor(
+                (distance %
+                (1000 * 60 * 60 * 24)) /
+                (1000 * 60 * 60)
+            );
+
+
+        const minutes =
+            Math.floor(
+                (distance %
+                (1000 * 60 * 60)) /
+                (1000 * 60)
+            );
+
+
+        const seconds =
+            Math.floor(
+                (distance %
+                (1000 * 60)) /
+                1000
+            );
+
+
+        document.getElementById("days")
+            .textContent =
+            String(days).padStart(2, "0");
+
+
+        document.getElementById("hours")
+            .textContent =
+            String(hours).padStart(2, "0");
+
+
+        document.getElementById("minutes")
+            .textContent =
+            String(minutes).padStart(2, "0");
+
+
+        document.getElementById("seconds")
+            .textContent =
+            String(seconds).padStart(2, "0");
+
+    }
+
+
+    updateCountdown();
+
+    setInterval(
+        updateCountdown,
+        1000
+    );
+
+</script>
+
+<!-- =========================================================
+     SAKURA FALLING PETALS INIT
+========================================================= -->
+<script>
+  (function(){
+    var layer = document.getElementById('sakuraLayer');
+    if(!layer) return;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced) return;
+    var total = 22; // number of petals on screen
+    for(var i=0; i<total; i++){
+      var petal = document.createElement('div');
+      petal.className = 'petal';
+      var size = 8 + Math.random()*10;
+      petal.style.width = size + 'px';
+      petal.style.height = size * 0.85 + 'px';
+      petal.style.left = (Math.random()*100) + 'vw';
+      petal.style.setProperty('--drift', (Math.random()*120 - 60) + 'px');
+      var duration = 9 + Math.random()*9;
+      petal.style.animationDuration = duration + 's';
+      petal.style.animationDelay = (Math.random()*duration) + 's';
+      layer.appendChild(petal);
+    }
+  })();
+</script>
+
+
+</body>
+</html>
+```
